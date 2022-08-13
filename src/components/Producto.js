@@ -6,7 +6,7 @@ function Producto({ producto, agregar, index}) {
       <div className="card__body">
         <div className="half">
           <div className="featured_text">
-            <h1>{producto.title}</h1>
+            <h2>{producto.title}</h2>
             <p className="price">{producto.price} €</p>
           </div>
           <div className="image">
