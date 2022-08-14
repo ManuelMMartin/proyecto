@@ -73,14 +73,7 @@ function App() {
         }
       })
     }
-
-    let arraySuma = []
-    carrito.forEach((producto) => {
-      arraySuma.push(producto.cantidad)
-    })
-    setSuma(arraySuma.map((item) => item).reduce((a, b) => a + b, 1))
-
-
+    setSuma(articulosCarrito())
     setAgregar("")
   }, [agregar, eliminar, carrito])
   /* MONTAR EL CARRITO */
@@ -102,17 +95,6 @@ function App() {
   }, [carrito])
   /* SUMO EL TOTAL DE IMPORTE EN CARRITO */
   /* ------------------------------------------------------------------------------------------------------ */
-
-  /* useEffect(() => {
-    
-    let arraySuma = []
-      carrito.forEach((producto) => {
-        arraySuma.push(producto.cantidad)
-      })
-      return (arraySuma.map((item) => item).reduce((a, b) => a + b, 0))
-  
-  }, [carrito]) */
-
 
   function articulosCarrito() {
     let arraySuma = []
