@@ -6,6 +6,9 @@ import Producto from "./components/Producto"
 import Carrito from "./components/Carrito";
 import Login from "./components/Login";
 import Buscador from "./components/Buscador";
+import { MainPage } from "./Paginas/MainPage";
+import { CarritoPage } from "./Paginas/CarritoPage";
+import { Comprar } from "./components/Comprar";
 
 // Obtener todas las categorías => `https://fakestoreapi.com/products/categories`
 // Obtener todos los productos => `https://fakestoreapi.com/products`
@@ -24,6 +27,7 @@ function App() {
   let [user, setUser] = useState("")
   let [pass, setPass] = useState("")
   let [login, setLogin] = useState(false)
+  let [suma, setSuma] = useState(0)
 
   /* ------------------------------------------------------------------------------------------------------ */
   /* TODOS LOS PRODUCTOS EN LA VISTA PRINCIPAL */
@@ -47,7 +51,6 @@ function App() {
         setCategoria(datos)
       })
     }
-
   }, [select])
   /* SELECCIONAR CATEGORIA */
   /* ------------------------------------------------------------------------------------------------------ */
@@ -66,12 +69,20 @@ function App() {
             })
           )
         } else {
-          setCarrito([...carrito, { ...datos }])
+          setCarrito([...carrito, datos])
         }
       })
     }
+
+    let arraySuma = []
+    carrito.forEach((producto) => {
+      arraySuma.push(producto.cantidad)
+    })
+    setSuma(arraySuma.map((item) => item).reduce((a, b) => a + b, 1))
+
+
     setAgregar("")
-  }, [agregar])
+  }, [agregar, eliminar, carrito])
   /* MONTAR EL CARRITO */
   /* ------------------------------------------------------------------------------------------------------ */
   /* BORRAR ELEMENTO DEL CARRITO */
@@ -79,8 +90,9 @@ function App() {
     if (eliminar !== "") {
       setCarrito(carrito.filter(objeto => objeto.id !== parseInt(eliminar)))
     }
+    setSuma(articulosCarrito())
     setEliminar("")
-  }, [eliminar])
+  }, [eliminar, carrito])
   /* BORRAR ELEMENTO DEL CARRITO */
   /* ------------------------------------------------------------------------------------------------------ */
   /* SUMO EL TOTAL DE IMPORTE EN CARRITO */
@@ -91,12 +103,31 @@ function App() {
   /* SUMO EL TOTAL DE IMPORTE EN CARRITO */
   /* ------------------------------------------------------------------------------------------------------ */
 
+  /* useEffect(() => {
+    
+    let arraySuma = []
+      carrito.forEach((producto) => {
+        arraySuma.push(producto.cantidad)
+      })
+      return (arraySuma.map((item) => item).reduce((a, b) => a + b, 0))
+  
+  }, [carrito]) */
+
+
+  function articulosCarrito() {
+    let arraySuma = []
+    carrito.forEach((producto) => {
+      arraySuma.push(producto.cantidad)
+    })
+    return (arraySuma.map((item) => item).reduce((a, b) => a + b, 0))
+  }
+
+
+
+
   return (
     <BrowserRouter>
-      <Cabecera
-        carrito={carrito}
-        login={login}
-        setLogin={setLogin} />
+      <Cabecera suma={suma} carrito={carrito} login={login} setLogin={setLogin} />
 
       <Routes>
         <Route path="/buscador" element={
@@ -112,21 +143,16 @@ function App() {
             pass={pass}
             setPass={setPass}
             login={login}
-            setLogin={setLogin} />} />
+            setLogin={setLogin}
+          />} />
 
         <Route path="/" element={
-          <main className="producto">
-            {productos.map((producto, index) => {
-              return (
-                <Producto
-                  key={index}
-                  producto={producto}
-                  agregar={(event) => (setAgregar(event.target.value))}
-                />
-              )
-            })}
-          </main>}
-        />
+          <MainPage
+            productos={productos}
+            Producto={Producto}
+            setAgregar={setAgregar}
+          />} />
+
         <Route path="/categorias" element={
           <nav>
             <div className="container">
@@ -134,7 +160,8 @@ function App() {
                 return (<Link key={index} to="/categorias/categoria"><button className="button__nav" value={categoria} onClick={(e) => (setSelect(e.target.value))}>{categoria}</button></Link>)
               })}
             </div>
-          </nav>} />
+          </nav>
+        } />
         <Route path="/categorias/categoria" element={<>
           <Link to="/categorias"><button>volver</button></Link>
           <div className="producto">
@@ -143,35 +170,30 @@ function App() {
                 <Producto
                   key={index}
                   producto={producto}
-                  agregar={(event) => (setAgregar(event.target.value))}
+                  agregar={() => (setAgregar(producto.id))}/* modificado */
                 />
               )
             })}
           </div>
         </>} />
         <Route path="/carrito" element={
-          <>
-            <div className="producto">
-              {carrito.map((producto, index) => {
-                return (
-                  <div key={index} className="card">
-                    <Carrito
-                      agregar={agregar}
-                      carrito={carrito}
-                      setCarrito={setCarrito}
-                      producto={producto}
-                      eliminar={(event) => (setEliminar(event.target.value))} />
-                  </div>
-                )
-              })}
-            </div>
-            <div>
-              <h2>Total {total + "€"}</h2>
-              <Link to="/carrito/comprar"><button onClick={() => ("")}>Comprar</button></Link>
-              <button onClick={() => (setCarrito([]))}>Vaciar carrito</button>
-            </div>
-          </>
-        } />
+          <CarritoPage
+            carrito={carrito}
+            Carrito={Carrito}
+            agregar={agregar}
+            setCarrito={setCarrito}
+            setEliminar={setEliminar}
+            total={total}
+            Link={Link}
+          />} />
+
+        <Route path="/carrito/comprar" element={
+          <Comprar
+            total={total}
+
+          />} />
+
+
 
       </Routes>
       <footer>Copyright © 2022 MegaSquall Shopping Center</footer>

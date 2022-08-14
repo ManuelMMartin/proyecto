@@ -1,25 +1,20 @@
 
 function Carrito({ producto, eliminar, carrito, setCarrito }) {
 
-   function sumar(props) {
-      console.log(parseInt(props))
+   function modificar(props) {
+      let cantidad = props ? 1 : -1
       for (const i in carrito) {
-         if (carrito[i].id === parseInt(props)) {
-            console.log(carrito[i])
-            setCarrito([...carrito, { ...carrito[i], cantidad: carrito[i].cantidad + 1 }])
+         if (carrito[i].id === producto.id) {
+            let nuevoCarrito = [...carrito]
+            nuevoCarrito[i].cantidad = carrito[i].cantidad + cantidad
+            if (nuevoCarrito[i].cantidad > 0) {
+               setCarrito(nuevoCarrito)
+            } else {
+               eliminar(producto.id)
+               setCarrito(nuevoCarrito)
+            }
          }
       }
-
-   }
-
-
-
-   function restar() {
-      setCarrito(
-         carrito.map((productoEnCarrito) => {
-            return productoEnCarrito.cantidad > 1 ? { ...productoEnCarrito, cantidad: productoEnCarrito.cantidad - 1 } : { ...productoEnCarrito, cantidad: productoEnCarrito.cantidad }
-         })
-      )
    }
 
    return (
@@ -29,9 +24,9 @@ function Carrito({ producto, eliminar, carrito, setCarrito }) {
                <div className="featured_text">
                   <h2>{producto.title}</h2>
                   <p className="price">{(producto.cantidad * producto.price)} €</p>
-                  <button value={producto.id} onClick={(e) => (sumar(e.target.value))}>+</button>
+                  <button onClick={() => (modificar(true))}>+</button>
                   <p>{producto.cantidad}</p>
-                  <button value={producto.id} onClick={(e) => (restar(e.target.value))}>-</button>
+                  <button onClick={() => (modificar(false))}>-</button>
                </div>
                <div className="image__cart">
                   <img src={producto.image} alt={producto.title} />
@@ -39,7 +34,7 @@ function Carrito({ producto, eliminar, carrito, setCarrito }) {
             </div>
          </div>
          <div className="action">
-            <button onClick={eliminar} value={producto.id} type="button">Eliminar</button>
+            <button onClick={eliminar} type="button">Eliminar</button>
          </div>
       </>
    )
