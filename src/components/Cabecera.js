@@ -1,61 +1,70 @@
 import { Link } from "react-router-dom"
 /* import { useState, useEffect } from "react" */
-import image from "../image/logo.png"
+import logo from "../image/logo.png"
+import cart from "../image/cart-image.png"
 
 
-function Cabecera({ login, setLogin, suma /* carrito */ }) {
-   /* let [suma, setSuma] = useState(0) */
-
-   /* useEffect(() => {
-      let arraySuma = []
-      carrito.forEach((producto) => {
-         arraySuma.push(producto.cantidad)
-         let totalSuma = arraySuma.map((item) => item).reduce((a, b) => a + b, 0)
-         setSuma(totalSuma)
-      });
-   }, [carrito]) */
-
+function Cabecera({ login, setLogin, suma, inputUser }) {
 
    if (login) {
       return (
-         <header className="header__container container">
-            <Link to="/"><img className="logo" src={image} alt="logo" /></Link>
-            <Link to="/categorias"><h3>CATEGORIAS</h3></Link>
-            <Link to="/buscador"><h3>BUSCADOR</h3></Link>
-            <Link to="/sobre_nosotros"><h3>SOBRE NOSOTROS</h3></Link>
-            <img className="userImage" src="https://w7.pngwing.com/pngs/741/68/png-transparent-user-computer-icons-user-miscellaneous-cdr-rectangle-thumbnail.png" alt="userImage" />
-            <p>Bienvenido</p>
-            <Link to="/carrito">
-               <button>
-                  <img className="cartImage" src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png" alt="cartImage" />
-                  <p>{suma}</p>
-               </button>
-            </Link>
-            <button onClick={() => (setLogin(false))}>Salir</button>
-         </header>
+
+         <header className="header">
+            <div className="header__container container">
+               <Link to="/"><img className="header__logo" src={logo} alt="logo" /></Link>
+               <nav className="header__menu">
+                  <ul className="header__menu-list">
+                     <li className="header__menu-item"><Link to="/categorias"><h3 className="header__menu-link">CATEGORIAS</h3></Link></li>
+                     <li className="header__menu-item"><Link to="/buscador"><h3 className="header__menu-link">BUSCADOR</h3></Link></li>
+                     <li className="header__menu-item"><Link to="/sobre_nosotros"><h3 className="header__menu-link">SOBRE NOSOTROS</h3></Link></li>
+                     <li className="header__menu-item"><h3>Bienvenido {inputUser.username}</h3></li>
+                     <li className="header__menu-item">
+                        <Link to="/carrito">
+                           <button className="button button--xs" onClick={() => ("")}>
+                              <img className="cartImage" src={cart} alt="cartImage" />
+                              <p>{suma}</p>
+                           </button>
+                        </Link>
+                     </li>
+                     <li className="header__menu-item">
+                        <button className="button button--xs" onClick={() => (setLogin(false))}>Salir</button>
+                     </li>
+                  </ul>
+               </nav >
+            </div >
+         </header >
+
       )
 
    } else {
       return (
-         <header className="header__container container">
-            <Link to="/"><img className="logo" src={image} alt="logo" /></Link>
-            <Link to="/categorias"><h3>CATEGORIAS</h3></Link>
-            <Link to="/buscador"><h3>BUSCADOR</h3></Link>
-            <Link to="/sobre-nosotros"><h3>SOBRE NOSOTROS</h3></Link>
-            <div>
-               <Link to="/carrito">
-                  <button onClick={() => ("")}>
-                     <img className="cartImage" src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png" alt="cartImage" />
-                     <p>{suma}</p>
-                  </button>
-               </Link>
-               <Link to="/login">
-                  <button>Login</button>
-               </Link>
-            </div>
-         </header>
+         <header className="header">
+            <div className="header__container container">
+               <Link to="/"><img className="header__logo" src={logo} alt="logo" /></Link>
+               <nav className="header__menu">
+                  <ul className="header__menu-list">
+                     <li className="header__menu-item"><Link to="/categorias"><h3 className="header__menu-link">CATEGORIAS</h3></Link></li>
+                     <li className="header__menu-item"><Link to="/buscador"><h3 className="header__menu-link">BUSCADOR</h3></Link></li>
+                     <li className="header__menu-item"><Link to="/sobre_nosotros"><h3 className="header__menu-link">SOBRE NOSOTROS</h3></Link></li>
+                     <li className="header__menu-item">
+                        <Link to="/carrito">
+                           <button className="button button--xs" onClick={() => ("")}>
+                              <img className="cartImage" src={cart} alt="cartImage" />
+                              <p>{suma}</p>
+                           </button>
+                        </Link>
+                     </li>
+                     <li className="header__menu-item">
+                        <Link to="/login">
+                           <button className="button button--xs">Login</button>
+                        </Link>
+                     </li>
+                  </ul>
+               </nav >
+            </div >
+         </header >
+
       )
    }
 }
-
 export default Cabecera

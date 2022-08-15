@@ -9,6 +9,8 @@ import Buscador from "./components/Buscador";
 import { MainPage } from "./Paginas/MainPage";
 import { CarritoPage } from "./Paginas/CarritoPage";
 import { Comprar } from "./components/Comprar";
+import { SobreNosotros } from "./components/SobreNosotros";
+import { Registro } from "./components/Registro";
 
 // Obtener todas las categorías => `https://fakestoreapi.com/products/categories`
 // Obtener todos los productos => `https://fakestoreapi.com/products`
@@ -26,6 +28,7 @@ function App() {
   let [total, setTotal] = useState(0)
   let [user, setUser] = useState("")
   let [pass, setPass] = useState("")
+  let [inputUser, setInputUser] = useState({})
   let [login, setLogin] = useState(false)
   let [suma, setSuma] = useState(0)
 
@@ -109,13 +112,17 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Cabecera suma={suma} carrito={carrito} login={login} setLogin={setLogin} />
+      <Cabecera suma={suma} carrito={carrito} login={login} setLogin={setLogin} inputUser={inputUser} />
 
       <Routes>
         <Route path="/buscador" element={
           <Buscador
             productos={productos}
             agregar={(event) => (setAgregar(event.target.value))}
+          />} />
+
+        <Route path="/sobre_nosotros" element={
+          <SobreNosotros
           />} />
 
         <Route path="/login" element={
@@ -126,7 +133,12 @@ function App() {
             setPass={setPass}
             login={login}
             setLogin={setLogin}
+            setInputUser={setInputUser}
           />} />
+
+          <Route path="/login/registro" element={
+          <Registro/>
+          }/>
 
         <Route path="/" element={
           <MainPage
@@ -139,20 +151,20 @@ function App() {
           <nav>
             <div className="container">
               {categorias.map((categoria, index) => {
-                return (<Link key={index} to="/categorias/categoria"><button className="button__nav" value={categoria} onClick={(e) => (setSelect(e.target.value))}>{categoria}</button></Link>)
+                return (<Link key={index} to="/categorias/categoria"><button className="button" value={categoria} onClick={(e) => (setSelect(e.target.value))}>{categoria}</button></Link>)
               })}
             </div>
           </nav>
         } />
         <Route path="/categorias/categoria" element={<>
-          <Link to="/categorias"><button>volver</button></Link>
+          <Link to="/categorias"><button className="button">volver</button></Link>
           <div className="producto">
             {categoria.map((producto, index) => {
               return (
                 <Producto
                   key={index}
                   producto={producto}
-                  agregar={() => (setAgregar(producto.id))}/* modificado */
+                  agregar={() => (setAgregar(producto.id))}
                 />
               )
             })}
@@ -172,6 +184,7 @@ function App() {
         <Route path="/carrito/comprar" element={
           <Comprar
             total={total}
+            carrito={carrito}
 
           />} />
 
