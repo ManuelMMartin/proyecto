@@ -1,6 +1,7 @@
 export function MainPage({Producto, productos, setAgregar}) {
    return (
-      <main className="producto">
+      <main className="container" >
+         <div className="producto">
          {productos.map((producto, index) => {
             return (
                <Producto
@@ -10,6 +11,7 @@ export function MainPage({Producto, productos, setAgregar}) {
                />
             )
          })}
+         </div>
       </main>
 
    )

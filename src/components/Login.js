@@ -12,20 +12,6 @@ function Login({ user, pass, setUser, setPass, setLogin, setInputUser }) {
 
    }, [])
 
-   useEffect(() => {
-      fetch('https://fakestoreapi.com/auth/login', {
-         method: 'POST',
-         body: JSON.stringify({
-            username: "aasd",
-            password: "ewedon"
-         })
-      })
-         .then(res => res.json())
-         .then(datos => { console.log(datos) })
-   }, [])
-
-
-
    function loginUser() {
       for (let i = 0; i < usuarios.length; i++) {
          if (user === usuarios[i].username && pass === usuarios[i].password) {
@@ -49,7 +35,7 @@ function Login({ user, pass, setUser, setPass, setLogin, setInputUser }) {
 
    return (
       <>
-         <form>
+         <form className="container">
             <div className="form">
                <p>(prueba con "donero" y "ewedon")</p>
                <div className="input-container">
@@ -70,10 +56,12 @@ function Login({ user, pass, setUser, setPass, setLogin, setInputUser }) {
                </div>
             </div>
          </form>
+         <div className="container">
          <p>{error}</p>
          <div className="button-container">
             <button onClick={() => (loginUser())}>Enviar</button>
-            <Link to="/login/registro"><button >Registrarse</button></Link>
+            <Link to="/login/registro"><button>Registrarse</button></Link>
+         </div>
          </div>
 
 

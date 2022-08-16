@@ -1,6 +1,6 @@
 export function CarritoPage({ carrito, Carrito, agregar, setCarrito, setEliminar, total, Link }) {
    return (
-      <>
+      <div className="container">
          <div className="producto">
             {carrito.map((producto, index) => {
                return (
@@ -16,11 +16,11 @@ export function CarritoPage({ carrito, Carrito, agregar, setCarrito, setEliminar
             })}
          </div>
          <div>
-            <h2>Total {total + "€"}</h2>
+            <p className="price">Total {total + "€"}</p>
             <Link to="/carrito/comprar"><button onClick={() => ("")}>Comprar</button></Link>
             <button onClick={() => setCarrito([])}>Vaciar carrito</button>
          </div>
-      </>
+      </div>
 
    )
 }

@@ -24,12 +24,15 @@ function Carrito({ producto, eliminar, carrito, setCarrito }) {
                <div className="featured_text">
                   <h2>{producto.title}</h2>
                   <p className="price">{(producto.cantidad * producto.price)} €</p>
-                  <button onClick={() => (modificar(true))}>+</button>
-                  <p>{producto.cantidad}</p>
-                  <button onClick={() => (modificar(false))}>-</button>
+
                </div>
                <div className="image__cart">
                   <img src={producto.image} alt={producto.title} />
+               </div>
+               <div className="container__button">
+                  <button className="button__masMenos" onClick={() => (modificar(true))}>+</button>
+                  <p>{producto.cantidad}</p>
+                  <button className="button__masMenos" onClick={() => (modificar(false))}>-</button>
                </div>
             </div>
          </div>
