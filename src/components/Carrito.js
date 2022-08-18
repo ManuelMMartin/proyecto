@@ -1,4 +1,4 @@
-
+import papelera from "../image/papelera.svg"
 function Carrito({ producto, eliminar, carrito, setCarrito }) {
 
    function modificar(props) {
@@ -30,14 +30,14 @@ function Carrito({ producto, eliminar, carrito, setCarrito }) {
                   <img src={producto.image} alt={producto.title} />
                </div>
                <div className="container__button">
-                  <button className="button__masMenos" onClick={() => (modificar(true))}>+</button>
-                  <p>{producto.cantidad}</p>
                   <button className="button__masMenos" onClick={() => (modificar(false))}>-</button>
+                  <p>{producto.cantidad}</p>
+                  <button className="button__masMenos" onClick={() => (modificar(true))}>+</button>
                </div>
             </div>
          </div>
          <div className="action">
-            <button onClick={eliminar} type="button">Eliminar</button>
+            <button onClick={eliminar} className="button__remove"><img src={papelera}/></button>
          </div>
       </>
    )

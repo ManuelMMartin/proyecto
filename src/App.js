@@ -37,7 +37,7 @@ function App() {
   /* TODOS LOS PRODUCTOS EN LA VISTA PRINCIPAL */
   useEffect(() => {
     setLoading(true)
-    fetch("https://fakestoreapi.com/products/").then(res => res.json()).then(datos => { setProductos(datos) })
+    fetch("https://fakestoreapi.com/products/").then(res => res.json()).then(datos => { setProductos(datos) }).catch(err => alert(`${err}, intentalo de nuevo mas tarde`))
     setLoading(false)
   }, [])
   /* TODOS LOS PRODUCTOS EN LA VISTA PRINCIPAL */
@@ -47,7 +47,7 @@ function App() {
     setLoading(true)
     fetch("https://fakestoreapi.com/products/categories").then(res => res.json()).then(datos => {
       setCategorias(datos)
-    })
+    }).catch(err => alert(`${err}, intentalo de nuevo mas tarde`))
     setLoading(false)
   }, [])
   /* LISTADO CATEGORIAS */
@@ -58,7 +58,7 @@ function App() {
       setLoading(true)
       fetch(`https://fakestoreapi.com/products/category/${select}`).then(res => res.json()).then(datos => {
         setCategoria(datos)
-      })
+      }).catch(err => alert(`${err}, intentalo de nuevo mas tarde`))
       setLoading(false)
     }
   }, [select])
@@ -82,7 +82,7 @@ function App() {
         } else {
           setCarrito([...carrito, datos])
         }
-      })
+      }).catch(err => alert(`${err}, intentalo de nuevo mas tarde`))
     }
     setSuma(articulosCarrito())
     setAgregar("")
@@ -116,11 +116,10 @@ function App() {
     return (arraySuma.map((item) => item).reduce((a, b) => a + b, 0))
   }
 
-
   if (loading) {
     return (
       <BrowserRouter>
-        <Cabecera suma={suma} carrito={carrito} login={login} setLogin={setLogin} inputUser={inputUser} />
+        <Cabecera suma={suma} carrito={carrito} login={login} setLogin={setLogin} inputUser={inputUser} categorias={categorias} setSelect={setSelect} />
         <h2>Cargando...</h2>
       </BrowserRouter>
     )
@@ -128,6 +127,7 @@ function App() {
 
     return (
       <BrowserRouter>
+        <span class="ir-arriba icon-arrow-up2"></span>
         <Cabecera suma={suma} carrito={carrito} login={login} setLogin={setLogin} inputUser={inputUser} categorias={categorias} setSelect={setSelect} />
 
         <Routes>
@@ -135,6 +135,8 @@ function App() {
             <Buscador
               productos={productos}
               agregar={(event) => (setAgregar(event.target.value))}
+              carrito={carrito}
+              setAgregar={setAgregar}
             />} />
 
           <Route path="/sobre_nosotros" element={
@@ -159,6 +161,7 @@ function App() {
           <Route path="/" element={
             <MainPage
               productos={productos}
+              carrito={carrito}
               Producto={Producto}
               setAgregar={setAgregar}
             />} />
@@ -166,10 +169,11 @@ function App() {
           <Route path="/categorias/categoria" element={<>
             <div className="container">
               <div className="producto">
-                {categoria.map((producto, index) => {
+                {categoria.map((producto) => {
                   return (
                     <Producto
-                      key={index}
+                      key={producto.id}
+                      carrito={carrito}
                       producto={producto}
                       agregar={() => (setAgregar(producto.id))}
                     />

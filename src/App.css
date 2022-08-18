@@ -540,7 +540,7 @@ button:hover {
 
 .button {
   background-color: #ffffff;
-  color: #3e45eb;
+  color: #e28c29;
   padding: 16px 30px;
   font-weight: 600;
   border-radius: 8px;
@@ -555,7 +555,7 @@ button:hover {
 }
 
 .button--link {
-  text-decoration: none; 
+  text-decoration: none;
 }
 
 .button--xs {
@@ -581,6 +581,36 @@ button:hover {
   justify-content: center;
   align-items: center;
 }
+
+.button__masMenos {
+  padding: 5px 15px;
+}
+
+.button__remove img {
+  height: 24px;
+  width: 24px;
+  color: #ffffff;
+}
+
+.button__remove {
+  padding: 5px 15px;
+  background-color: #c01e1e;
+}
+
+.button__remove:hover {
+  background-color: #da1825;
+}
+
+.button__add {
+  background-color: green;
+
+}
+
+.li__compra {
+  list-style: decimal inside;
+  margin-bottom: 10px;
+}
+
 
 /* NOTE: Modules */
 
@@ -612,7 +642,7 @@ button:hover {
   margin-top: 10px;
 }
 
-.container__button p{
+.container__button p {
   margin: 10px;
 }
 
@@ -748,7 +778,6 @@ button:hover {
 
 
 /* NOTE: Pages */
-/* -----------------------------para borrar cuando este el css------------------------------------------- */
 /*  */
 * {
   box-sizing: border-box;
@@ -839,7 +868,6 @@ p.price {
 
 .image__cart {
   padding-top: 15px;
-  width: 50%;
 }
 
 img {
@@ -947,6 +975,11 @@ input[type="submit"]:hover {
   justify-content: center;
 }
 
+.form {
+  max-width: 408px;
+  width: 100%;
+}
+
 .login-form {
   background-color: white;
   padding: 2rem;
@@ -976,20 +1009,22 @@ input[type="submit"]:hover {
 /* FORMULARIO CONTACTO */
 
 .contact_form {
-  width: 460px;
+  max-width: 460px;
+  width: 100%;
   height: auto;
   margin: 80px auto;
   border-radius: 10px;
-  padding-top: 30px;
-  padding-bottom: 20px;
   background-color: #fbfbfb;
-  padding-left: 30px;
+  padding: 30px;
 }
 
+.contact_form p {
+  width: 100%;
+}
 
 input {
   background-color: #fbfbfb;
-  width: 408px;
+  width: 100%;
   height: 40px;
   border-radius: 5px;
   border-style: solid;
@@ -1020,10 +1055,6 @@ label {
   display: block;
   float: center;
 }
-
-
-
-
 
 button p {
   color: #fff;
@@ -1065,4 +1096,10 @@ p {
 .formulario textarea:focus {
   outline: 0;
   border: 1px solid #97d848;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

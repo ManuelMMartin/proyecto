@@ -36,6 +36,7 @@ function Login({ user, pass, setUser, setPass, setLogin, setInputUser }) {
    return (
       <>
          <form className="container">
+            <div className="formulario">
             <div className="form">
                <p>(prueba con "donero" y "ewedon")</p>
                <div className="input-container">
@@ -54,6 +55,7 @@ function Login({ user, pass, setUser, setPass, setLogin, setInputUser }) {
                      type="password"
                   />
                </div>
+            </div>
             </div>
          </form>
          <div className="container">

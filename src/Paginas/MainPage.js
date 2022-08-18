@@ -1,4 +1,4 @@
-export function MainPage({Producto, productos, setAgregar}) {
+export function MainPage({Producto, productos, setAgregar, carrito}) {
    return (
       <main className="container" >
          <div className="producto">
@@ -6,6 +6,7 @@ export function MainPage({Producto, productos, setAgregar}) {
             return (
                <Producto
                   key={index}
+                  carrito={carrito}
                   producto={producto}
                   agregar={() => (setAgregar(producto.id))}
                />

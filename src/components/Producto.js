@@ -1,8 +1,21 @@
+import { useState, useEffect } from "react"
+function Producto({ producto, agregar, index, carrito }) {
+  let [agregado, setAgregado] = useState(false)
+  
+  useEffect(() => {
 
-function Producto({ producto, agregar, index}) {
+    carrito.map((productoEnCarrito) => {
+      if (productoEnCarrito.id === producto.id) {
+        setAgregado(true)
+      }
+    })
+
+  }, [carrito])
+
+
 
   return (
-    <div key={index} className="card">
+    <div key={producto.id} className="card">
       <div className="card__body">
         <div className="half">
           <div className="featured_text">
@@ -15,7 +28,9 @@ function Producto({ producto, agregar, index}) {
         </div>
       </div>
       <div className="action">
-        <button onClick={agregar} value={producto.id} type="button">Agregar</button>
+        {agregado?
+          <button className="button__add" onClick={agregar} value={producto.id} type="button">Agregado</button> :
+          <button onClick={agregar} value={producto.id} type="button">Agregar</button>}
       </div>
     </div>
   )
