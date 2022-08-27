@@ -474,8 +474,6 @@ th.table__column {
   color: #3e45eb;
 }
 
-/* NOTE: Layout */
-
 .container {
   max-width: 1200px;
   width: 100%;
@@ -516,10 +514,6 @@ th.table__column {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 
 }
-
-
-
-/* NOTE: Components */
 
 button {
   cursor: pointer;
@@ -611,9 +605,6 @@ button:hover {
   margin-bottom: 10px;
 }
 
-
-/* NOTE: Modules */
-
 .header__message {
   color: #ffffff;
   background-color: #243141;
@@ -645,8 +636,6 @@ button:hover {
 .container__button p {
   margin: 10px;
 }
-
-
 
 .header__logo {
   width: 87px;
@@ -767,7 +756,6 @@ button:hover {
   color: #3e45eb;
 }
 
-
 .footer__container {
   display: flex;
   align-items: center;
@@ -775,18 +763,12 @@ button:hover {
   padding-bottom: 20px;
 }
 
-
-
-/* NOTE: Pages */
-/*  */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
 }
-
-
 
 header h1 {
   color: #c0bec0;
@@ -800,10 +782,11 @@ header h1 {
   height: 50px;
 }
 
-
-
 .cartImage {
-  height: 30px
+  height: 30px;
+  width: auto;
+  object-fit: contain;
+  object-position: center center;
 }
 
 /* estilos cartas productos */
@@ -974,6 +957,13 @@ input[type="submit"]:hover {
   display: flex;
   justify-content: center;
 }
+.button__mod{
+  margin-top: 20px;
+}
+
+.button__mod:hover {
+  background-color: #cc1818;
+}
 
 .form {
   max-width: 408px;
@@ -1035,10 +1025,9 @@ input {
   margin-bottom: 20px;
 }
 
-
 textarea {
   background-color: #fbfbfb;
-  width: 405px;
+  width: 100%;
   height: 150px;
   border-radius: 5px;
   border-style: solid;
@@ -1050,7 +1039,6 @@ textarea {
   padding-top: 15px;
 }
 
-
 label {
   display: block;
   float: center;
@@ -1060,11 +1048,9 @@ button p {
   color: #fff;
 }
 
-
 span {
   color: #e28c29;
 }
-
 
 .aviso {
   font-size: 13px;
@@ -1086,12 +1072,10 @@ p {
   color: #a8a8a8;
 }
 
-
 .formulario input:focus {
   outline: 0;
   border: 1px solid #97d848;
 }
-
 
 .formulario textarea:focus {
   outline: 0;

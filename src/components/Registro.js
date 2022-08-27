@@ -57,6 +57,7 @@ export function Registro() {
       if (email !== "" && usuario !== "" && password !== "" && nombre !== "" && apellidos !== "" && ciudad !== "" && calle !== "" && telefono !== "") {
          alert("En breve recibiras un correo confirmando el registro")
          console.log(JSON.stringify(datos))
+         
       } else {
          alert("Debes rellenar todos los campos obligatorios")
       }
@@ -64,27 +65,27 @@ export function Registro() {
 
    return (
       <div className="container">
-         <form className="registro-form">
+         <div className="contact_form">
             <div className="formulario">
                <h3>Formulario de registro</h3>
 
                <p>
-                  <label className="colocar_nombre">email
+                  <label className="colocar_email">email
                      <span className="obligatorio">*</span>
                   </label>
                   <input value={email}
-                     onChange={(e) => (setEmail((e.target.value)))} type="text" placeholder="Escribe tu email" required />
+                     onChange={(e) => (setEmail((e.target.value)))} type="email" id="email" placeholder="Escribe tu email" required />
                </p>
 
                <p>
-                  <label className="colocar_email">Usuario
+                  <label className="colocar_usuario">Usuario
                      <span className="obligatorio">*</span>
                   </label>
                   <input value={usuario}
                      onChange={(e) => (setUsuario((e.target.value)))} type="text" placeholder="Escribe tu usuario" required />
                </p>
                <p>
-                  <label className="colocar_email">Contraseña
+                  <label className="colocar_contraseña">Contraseña
                      <span className="obligatorio">*</span>
                   </label>
                   <input value={password}
@@ -92,14 +93,14 @@ export function Registro() {
                </p>
 
                <p>
-                  <label className="colocar_telefono">Nombre
+                  <label className="colocar_nombre">Nombre
                   </label>
                   <input value={nombre}
                      onChange={(e) => (setNombre((e.target.value)))} type="text" placeholder="Escribe tu nombre" required />
                </p>
 
                <p>
-                  <label className="colocar_asunto">Apellidos
+                  <label className="colocar_apellidos">Apellidos
                      <span className="obligatorio">*</span>
                   </label>
                   <input value={apellidos}
@@ -107,14 +108,14 @@ export function Registro() {
                </p>
 
                <p>
-                  <label className="colocar_asunto">Ciudad
+                  <label className="colocar_ciudad">Ciudad
                      <span className="obligatorio">*</span>
                   </label>
                   <input value={ciudad}
                      onChange={(e) => (setCiudad((e.target.value)))} type="text" placeholder="Escribe tu ciudad" required />
                </p>
                <p>
-                  <label className="colocar_asunto">Calle
+                  <label className="colocar_calle">Calle
                      <span className="obligatorio">*</span>
                   </label>
                   <input value={calle}
@@ -122,11 +123,11 @@ export function Registro() {
                </p>
 
                <p>
-                  <label className="colocar_mensaje">Telefono
+                  <label className="colocar_Telefono">Telefono
                      <span className="obligatorio">*</span>
                   </label>
                   <input value={telefono}
-                     onChange={(e) => (setTelefono((e.target.value)))} type="text" id="mensaje" placeholder="Escribe tu telefono" required></input>
+                     onChange={(e) => (setTelefono((e.target.value)))} type="phone" id="mensaje" placeholder="Escribe tu telefono" required />
                </p>
 
                <button onClick={() => enviarDatosRegistro()} type="submit"><p>Enviar</p></button>
@@ -137,7 +138,7 @@ export function Registro() {
 
 
             </div>
-         </form>
+         </div>
       </div>
 
    )

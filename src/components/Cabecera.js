@@ -27,7 +27,7 @@ function Cabecera({ login, setLogin, suma, inputUser, categorias, setSelect }) {
                      </li>
                      <li className="header__menu-item"><Link to="/buscador"><h3 className="header__menu-link">BUSCADOR</h3></Link></li>
                      <li className="header__menu-item"><Link to="/sobre_nosotros"><h3 className="header__menu-link">SOBRE NOSOTROS</h3></Link></li>
-                     <li className="header__menu-item"><h3>Bienvenido {inputUser.username}</h3></li>
+                     <li className="header__menu-item"><Link to="/login"><h3>Bienvenido {inputUser.username}</h3></Link></li>
                      <li className="header__menu-item">
                         <Link to="/carrito">
                            <button className="button button--carrito button--xs" onClick={() => ("")}>

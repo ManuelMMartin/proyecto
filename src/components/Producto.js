@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-function Producto({ producto, agregar, index, carrito }) {
+function Producto({ producto, agregar, carrito }) {
   let [agregado, setAgregado] = useState(false)
   
   useEffect(() => {

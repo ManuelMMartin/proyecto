@@ -32,6 +32,8 @@ function App() {
   let [login, setLogin] = useState(false)
   let [suma, setSuma] = useState(0)
   let [loading, setLoading] = useState(false)
+  let [compras, setCompras] = useState(0)
+
 
   /* ------------------------------------------------------------------------------------------------------ */
   /* TODOS LOS PRODUCTOS EN LA VISTA PRINCIPAL */
@@ -127,7 +129,6 @@ function App() {
 
     return (
       <BrowserRouter>
-        <span class="ir-arriba icon-arrow-up2"></span>
         <Cabecera suma={suma} carrito={carrito} login={login} setLogin={setLogin} inputUser={inputUser} categorias={categorias} setSelect={setSelect} />
 
         <Routes>
@@ -152,6 +153,9 @@ function App() {
               login={login}
               setLogin={setLogin}
               setInputUser={setInputUser}
+              inputUser={inputUser}
+              carrito={carrito}
+              compras={compras}
             />} />
 
           <Route path="/login/registro" element={
@@ -197,6 +201,11 @@ function App() {
             <Comprar
               total={total}
               carrito={carrito}
+              setCarrito={setCarrito}
+              login={login}
+              Link={Link}
+              compras={compras}
+              setCompras={setCompras}
 
             />} />
 

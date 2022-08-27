@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 
-export function Comprar({ total, carrito }) {
+export function Comprar({ total, carrito, setCarrito, login, Link, compras, setCompras }) {
    let [datos, setDatos] = useState({
       card: "",
       date: "",
@@ -21,64 +21,126 @@ export function Comprar({ total, carrito }) {
          setNumCard("")
          setFechaCard("")
          setCvv("")
+         setCompras(compras+1)
          alert("Cobro efectuado")
+         setCarrito([])
       } else {
          alert("Tienes que rellenar todos los campos")
       }
+      
    }
 
-   return (
-      <div className="container">
-         <div className="formulario">
-            <div className="form">
 
-               <label>NºTarjeta<span className="obligatorio">*</span></label>
-               <input
-                  value={numCard}
-                  onChange={(e) => (setNumCard((e.target.value)))}
-                  type="num"
-                  required />
+   if (login) {
+      return (
+         <div className="container">
+            <div className="formulario">
+               <div className="form">
+
+                  <label>NºTarjeta<span className="obligatorio">*</span></label>
+                  <input
+                     value={numCard}
+                     onChange={(e) => (setNumCard((e.target.value)))}
+                     type="num"
+                     required />
 
 
-               <label>Caducidad<span className="obligatorio">*</span></label>
-               <input
-                  value={fechaCard}
-                  onChange={(e) => (setFechaCard((e.target.value)))}
-                  type="date"
-                  required />
-               <label>CVV<span className="obligatorio">*</span></label>
-               <input
-                  value={cvv}
-                  onChange={(e) => (setCvv((e.target.value)))}
-                  type="num"
-                  required />
+                  <label>Caducidad<span className="obligatorio">*</span></label>
+                  <input
+                     value={fechaCard}
+                     onChange={(e) => (setFechaCard((e.target.value)))}
+                     type="date"
+                     required />
+                  <label>CVV<span className="obligatorio">*</span></label>
+                  <input
+                     value={cvv}
+                     onChange={(e) => (setCvv((e.target.value)))}
+                     type="num"
+                     required />
 
-               <p className="aviso">
-                  <span className="obligatorio"> * </span>los campos son obligatorios.
-               </p>
+                  <p className="aviso">
+                     <span className="obligatorio"> * </span>los campos son obligatorios.
+                  </p>
 
-               <ul>
-                  {carrito.map((producto, index) => {
-                     return (<li className="li__compra" key={index}>{producto.title} - Cantidad - {producto.cantidad} unidades. Importe {producto.cantidad * producto.price}€</li>)
-                  })}
-               </ul>
-               <p className="price">Total {total.toFixed(2)}€</p>
+                  <ul>
+                     {carrito.map((producto) => {
+                        return (<li className="li__compra" key={producto.id}>{producto.title} - Cantidad - {producto.cantidad} unidades. Importe {producto.cantidad * producto.price}€</li>)
+                     })}
+                  </ul>
+                  <p className="price">Total {total.toFixed(2)}€</p>
 
-               <input
-                  type="checkbox"
-                  name="confirmar"
-                  checked={isChecked}
-                  onChange={() => setIsChecked(!isChecked)}
-               />
+                  <input
+                     type="checkbox"
+                     name="confirmar"
+                     checked={isChecked}
+                     onChange={() => setIsChecked(!isChecked)}
+                  />
 
-               <p>¿Confirmas que los datos son correctos? {isChecked ? " Si!" : "Espera que miro..."}</p>
+                  <p>¿Confirmas que los datos son correctos? {isChecked ? " Si!" : "Espera que miro..."}</p>
 
-               <div className="container">
-                  {isChecked ? <button onClick={() => enviarDatosPago()}>Pagar</button> : ""}
+                  <div className="container">
+                     {isChecked ? <button onClick={() => enviarDatosPago()}>Pagar</button> : ""}
 
+                  </div>
                </div>
             </div>
          </div>
-      </div>
-   )
+      )
+   } else {
+
+      return (
+         <div className="container">
+            <div className="formulario">
+               <div className="form">
+
+                  <label>NºTarjeta<span className="obligatorio">*</span></label>
+                  <input
+                     value={numCard}
+                     onChange={(e) => (setNumCard((e.target.value)))}
+                     type="num"
+                     required />
+
+
+                  <label>Caducidad<span className="obligatorio">*</span></label>
+                  <input
+                     value={fechaCard}
+                     onChange={(e) => (setFechaCard((e.target.value)))}
+                     type="date"
+                     required />
+                  <label>CVV<span className="obligatorio">*</span></label>
+                  <input
+                     value={cvv}
+                     onChange={(e) => (setCvv((e.target.value)))}
+                     type="num"
+                     required />
+
+                  <p className="aviso">
+                     <span className="obligatorio"> * </span>los campos son obligatorios.
+                  </p>
+
+                  <ul>
+                     {carrito.map((producto) => {
+                        return (<li className="li__compra" key={producto.id}>{producto.title} - Cantidad - {producto.cantidad} unidades. Importe {producto.cantidad * producto.price}€</li>)
+                     })}
+                  </ul>
+                  <p className="price">Total {total.toFixed(2)}€</p>
+
+                  <input
+                     type="checkbox"
+                     name="confirmar"
+                     checked={isChecked}
+                     onChange={() => setIsChecked(!isChecked)}
+                  />
+
+                  <p>¿Confirmas que los datos son correctos? {isChecked ? " Si!" : "Espera que miro..."}</p>
+
+                  <div className="container">
+                     {isChecked ? <Link to="/login"><button onClick={() => alert("Logueate para poder comprar")}>Pagar</button></Link> : ""}
+
+                  </div>
+               </div>
+            </div>
+         </div>
+      )
+   }
 }
